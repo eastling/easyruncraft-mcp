@@ -1,0 +1,15 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
+  "mcpServers": {
+    "easyruncraft": {
+      "type": "streamable-http",
+      "url": "https://easyruncraft.com/mcp",
+      "extensions": {"com.openai": {"auth": {
+        "type": "oauth",
+        "client": {"mode": "cimd"},
+        "resource": "https://easyruncraft.com/mcp",
+        "baseScopes": ["mcp:tools", "offline_access"]
+      }}}
+    }
+  }
+}

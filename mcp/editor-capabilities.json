@@ -1,0 +1,149 @@
+{
+  "photo": {
+    "name": "PhotoCraft",
+    "tool": "process_photo",
+    "formats": "PNG \u00b7 JPEG \u00b7 WebP \u00b7 PSD",
+    "summary": "Inspect image dimensions and layers, resize, rotate, flip, or convert images.",
+    "operations": {
+      "inspect": "Read canvas dimensions, color mode, bit depth and the layer tree.",
+      "edit": "Apply up to five ordered edits. Rotate the entire canvas clockwise by 90, 180 or 270 degrees; flip it horizontally or vertically; or resize it to an explicit width and height in pixels.",
+      "convert": "Export the uploaded image as PNG, JPEG, WebP or PSD without applying edits."
+    },
+    "limits": "Both resize dimensions must be between 1 and 4096 pixels. Images over 16,777,216 canvas pixels are outside the supported range. PNG, JPEG and WebP output flatten layers. JPEG also drops transparency. Use PSD for layered output and review it for compatibility.",
+    "example": "Rotate scan.png 90 degrees clockwise and return a PNG copy."
+  },
+  "word": {
+    "name": "WordCraft",
+    "tool": "process_word",
+    "formats": "DOCX",
+    "summary": "Inspect a Word document, read body paragraphs, append a paragraph, or export as PDF.",
+    "operations": {
+      "inspect": "Read document metadata, page and word counts, and Track Changes status.",
+      "read_paragraphs": "Read up to 40 body blocks starting at a zero-based block index. Text is capped at 2,000 characters per block. Tables and embedded objects are not extracted as editable paragraphs.",
+      "append_paragraph": "Add one plain-text paragraph of up to 2,000 characters at the end of the document and return a new DOCX.",
+      "export_pdf": "Render an uploaded DOCX of up to 100 pages as a PDF."
+    },
+    "limits": "Appending requires a final body paragraph and Track Changes turned off. Complex Word features and fonts can look different after saving or exporting; review the result.",
+    "example": "Add \u201cNext review: Friday.\u201d as the last paragraph of agenda.docx and return the edited DOCX."
+  },
+  "deck": {
+    "name": "DeckCraft",
+    "tool": "process_deck",
+    "formats": "PPTX",
+    "summary": "Inspect slides, read or replace speaker notes, and render a slide as PNG.",
+    "operations": {
+      "inspect": "List slide titles, layouts, size and shape counts.",
+      "read_slide": "Read one slide by its 1-based number, including its shapes and the exact plain speaker notes.",
+      "set_notes": "Replace the speaker notes on one slide. Supply the exact current notes as expected_text. Use an empty string to clear the notes. Returns a new PPTX.",
+      "render_slide": "Render one slide by its 1-based number at its native size as a PNG."
+    },
+    "limits": "New notes and their expected text each accept up to 8,000 characters. Replacing notes uses plain text. Complex PowerPoint features and fonts can look different after saving or rendering; review the result.",
+    "example": "Render slide 3 of kickoff.pptx and give me the PNG."
+  },
+  "vector": {
+    "name": "VectorCraft",
+    "tool": "process_vector",
+    "formats": ".vectorcraft",
+    "summary": "Inspect a vector design, add a basic shape, or export one artboard.",
+    "operations": {
+      "inspect": "Read artboards, top-level layers, object counts and link warnings.",
+      "add_shape": "Add a rectangle or ellipse on the current layer. Provide x, y, width and height in document points. Returns an editable VectorCraft copy.",
+      "export_artboard": "Choose a 1-based artboard number and export it as PNG or PDF."
+    },
+    "limits": "Coordinates use document points from the first artboard\u2019s top-left, with y increasing downwards. PNG artboards can be up to 4096 points per side. Embed linked assets before uploading for complete exports.",
+    "example": "Export artboard 2 of logo.vectorcraft as a PDF."
+  },
+  "fig": {
+    "name": "FigCraft",
+    "tool": "process_fig",
+    "formats": ".figcraft",
+    "summary": "Inspect a design, add a rectangle, or export a frame or page.",
+    "operations": {
+      "inspect": "List pages and top-level frames with their IDs and dimensions.",
+      "add_rectangle": "Add one rectangle directly to the selected page. Provide the 1-based page number and x, y, width and height in pixels. Returns an editable FigCraft copy.",
+      "render_frame": "Export one top-level frame as PNG. Pass its ID and the 1-based page number from inspection.",
+      "export_page_pdf": "Export a page as a PDF. Visible top-level frames export as separate PDF pages. If there are no frames, the page content exports together."
+    },
+    "limits": "Rectangle and PNG frame dimensions are limited to 4096 pixels per side. Export requires unique page names.",
+    "example": "List the frames in prototype.figcraft, then export the Checkout frame as PNG."
+  },
+  "cad": {
+    "name": "CADCraft",
+    "tool": "process_cad",
+    "formats": "Text DXF",
+    "summary": "Inspect a drawing, add a line or circle, or export model space.",
+    "operations": {
+      "inspect": "Read layers, model-space extents and entity counts.",
+      "add_line": "Add a line in model space using distinct start and end [x, y] coordinates. Returns an editable DXF copy.",
+      "add_circle": "Add a circle in model space using a center [x, y] and positive radius. Returns an editable DXF copy.",
+      "export_model": "Fit model-space drawing extents and export as PNG or PDF."
+    },
+    "limits": "Use a standalone text DXF without Xrefs, linked images, underlays or point clouds. Edits use the current layer, which must be on, unlocked and unfrozen. Coordinates and radius are in drawing units. Review the saved copy if your DXF uses specialized CAD features.",
+    "example": "Draw a circle centered at (20, 30) with radius 5 in bracket.dxf and return the edited DXF."
+  },
+  "design": {
+    "name": "DesignCraft",
+    "tool": "process_design",
+    "formats": ".designcraft",
+    "summary": "Inspect a page layout, add a text frame, or export selected pages as PDF.",
+    "operations": {
+      "inspect": "Read the document\u2019s spreads, page bounds, items and layers.",
+      "add_text_frame": "Add plain text in a new frame on a 1-based spread. Supply its [left, top, right, bottom] bounds in points in spread coordinates.",
+      "export_pdf": "Export up to 20 distinct 1-based pages as a PDF."
+    },
+    "limits": "Embed placed assets and remove data merge sources before uploading. The document manifest must fit the 2 MiB inspection limit.",
+    "example": "Export pages 1 and 3 of newsletter.designcraft as a PDF."
+  },
+  "light": {
+    "name": "LightCraft",
+    "tool": "process_light",
+    "formats": "DNG \u00b7 JPEG \u00b7 PNG \u00b7 WebP",
+    "summary": "Inspect a photo and develop a copy with exposure, contrast and saturation adjustments.",
+    "operations": {
+      "inspect": "Read the photo\u2019s format, dimensions and develop settings.",
+      "develop": "Adjust exposure from \u22125 to 5 EV, contrast or saturation from \u2212100 to 100, then export JPEG, PNG or WebP. Set long_edge from 64 to 3072 pixels."
+    },
+    "limits": "Developing supports images up to 40 megapixels. The output may be smaller than the requested maximum long edge.",
+    "example": "Brighten portrait.jpg by half a stop and give me a WebP with a long edge up to 1600 pixels."
+  },
+  "sound": {
+    "name": "SoundCraft",
+    "tool": "process_sound",
+    "formats": "WAV \u00b7 FLAC \u00b7 MP3",
+    "summary": "Inspect an audio clip, adjust its gain, or convert and normalize it.",
+    "operations": {
+      "inspect": "Read the format, duration, channel count and sample rate.",
+      "convert": "Convert to WAV or FLAC, with optional peak normalization.",
+      "adjust_gain": "Apply \u221260 to +12 dB on a track in a fresh SoundCraft session and return a stereo WAV mix."
+    },
+    "limits": "Audio output supports inputs of up to 60 seconds, two channels and 96 kHz.",
+    "example": "Turn voice.wav down by 6 dB and give me the WAV."
+  },
+  "film": {
+    "name": "FilmCraft",
+    "tool": "process_film",
+    "formats": "MP4 \u00b7 MOV",
+    "summary": "Inspect a video clip, extract a frame, or trim a short range to MP4.",
+    "operations": {
+      "inspect": "Read the clip\u2019s duration, dimensions, frame rate, video codec and audio streams.",
+      "render_frame": "Export a PNG at a specified timestamp in seconds.",
+      "trim_video": "Export an up to eight-second range as H.264 MP4 with the clip\u2019s audio when present. The output long edge is capped at 960 pixels."
+    },
+    "limits": "Frame and trim jobs accept one clip up to 120 seconds, 1920 by 1080 pixels in either orientation and 60 fps. The container must have a readable MP4 or QuickTime file type box.",
+    "example": "Cut promo.mp4 from 2 seconds to 6 seconds and return the MP4."
+  },
+  "effect": {
+    "name": "EffectCraft",
+    "tool": "process_effect",
+    "formats": ".ecproj",
+    "summary": "Inspect a motion project, add a text layer, or render a frame or a short composition range.",
+    "operations": {
+      "inspect": "List compositions and project items, including composition IDs, sizes and durations.",
+      "add_text": "Add one plain-text layer to the active composition and return an editable project copy.",
+      "render_frame": "Render one PNG frame at a specified time, optionally selecting a composition by ID.",
+      "render_video": "Render up to five seconds of a composition as a silent H.264 MP4 at half resolution and 12 fps."
+    },
+    "limits": "Use a self-contained project with no file-backed footage. For MP4 the render queue must be empty and the composition must be at most 1920 by 1080 pixels in either orientation.",
+    "example": "Render the first three seconds of intro.ecproj as a silent MP4."
+  }
+}

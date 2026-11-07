@@ -1,0 +1,47 @@
+{
+  "name": "easyruncraft-mcp",
+  "version": "0.1.0",
+  "description": "Inspect and edit documents, spreadsheets, images and creative files with browser authorization.",
+  "mcpName": "com.easyruncraft/mcp",
+  "type": "module",
+  "license": "MIT",
+  "homepage": "https://easyruncraft.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eastling/easyruncraft-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/eastling/easyruncraft-mcp/issues"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "files": [
+    "mcp",
+    "docs",
+    "distribution",
+    "server.json",
+    "mcp.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "start": "node mcp/server.mjs"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "modelcontextprotocol",
+    "easyruncraft",
+    "streamable-http",
+    "oauth",
+    "pdf",
+    "documents"
+  ],
+  "dependencies": {
+    "@better-auth/cimd": "1.7.17",
+    "@modelcontextprotocol/node": "2.1.2",
+    "@modelcontextprotocol/server": "2.4.0",
+    "zod": "^4.6.7"
+  }
+}
