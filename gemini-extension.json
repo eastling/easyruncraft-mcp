@@ -1,0 +1,10 @@
+{
+  "name": "easyruncraft-mcp",
+  "version": "0.1.0",
+  "description": "EasyRunCraft is an online office suite for AI agents. Edit docs, sheets, slides and PDFs in the browser free, or connect Codex and Claude Code via MCP.",
+  "mcpServers": {
+    "easyruncraft": {
+      "httpUrl": "https://easyruncraft.com/mcp"
+    }
+  }
+}
